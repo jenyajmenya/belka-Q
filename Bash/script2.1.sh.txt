@@ -1,0 +1,6 @@
+#!/bin/bash
+
+#Выводит топ10 ip address
+less /home/evgen/sportpari.by | cut -d ' ' -f1 | sort | uniq -c | sort -n | tail -n 10
+
+

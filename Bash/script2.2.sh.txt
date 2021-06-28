@@ -1,0 +1,5 @@
+#!/bin/bash
+
+#поиск http кодов
+cat  /home/evgen/sportpari.by | cut -d '"' -f3 | cut -d ' ' -f2 | sort | uniq
+

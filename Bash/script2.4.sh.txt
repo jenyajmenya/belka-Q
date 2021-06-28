@@ -1,0 +1,3 @@
+#!/bin/bash
+
+grep '/media/bimages/blitz.jpg' /home/evgen/sportpari.by | wc -l
