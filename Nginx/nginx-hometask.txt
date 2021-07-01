@@ -1,0 +1,71 @@
+Step by Step:
+
+> wget nginx-1.20.1.tar.gz
+> tar xvf nginx-1.20.1.tar.gz
+> apt install libgeoip-dev -y
+> ./configure --prefix=/etc/nginx --sbin-path=/usr/sbin/nginx --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log --http-log-path=/var/log/nginx/access.log --pid-path=/var/run/nginx.pid --lock-path=/var/run/nginx.lock --http-client-body-temp-path=/var/cache/nginx/client_temp --http-proxy-temp-path=/var/cache/nginx/proxy_temp --http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp --user=nginx --group=nginx --without-http_autoindex_module --without-http_ssi_module --without-http_scgi_module --without-http_uwsgi_module --without-http_split_clients_module --without-http_memcached_module --without-http_empty_gif_module --without-http_browser_module --with-http_ssl_module --with-http_v2_module --with-http_realip_module --with-http_mp4_module --with-http_auth_request_module --with-http_stub_status_module --with-http_random_index_module --with-http_gunzip_module --with-threads --with-openssl=/usr/local/src/openssl-1.1.0f --with-http_geoip_module
+
+Error: ./configure: error: C compiler cc is not found
+
+> apt install gcc
+> ./configure ...
+
+Error: ./configure: error: the HTTP rewrite module requires the PCRE library.
+You can either disable the module by using --without-http_rewrite_module
+option, or install the PCRE library into the system, or build the PCRE library
+statically from the source with nginx by using --with-pcre=<path> option.
+
+> wget wget https://ftp.pcre.org/pub/pcre/pcre-8.42.tar.gz
+> tar xvf pcre-8.42.tar.gz
+> ./configure --prefix=/etc/nginx --sbin-path=/usr/sbin/nginx --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log --http-log-path=/var/log/nginx/access.log --pid-path=/var/run/nginx.pid --lock-path=/var/run/nginx.lock --http-client-body-temp-path=/var/cache/nginx/client_temp --http-proxy-temp-path=/var/cache/nginx/proxy_temp --http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp --user=nginx --group=nginx --without-http_autoindex_module --without-http_ssi_module --without-http_scgi_module --without-http_uwsgi_module --without-http_split_clients_module --without-http_memcached_module --without-http_empty_gif_module --without-http_browser_module --with-http_ssl_module --with-http_v2_module --with-http_realip_module --with-http_mp4_module --with-http_auth_request_module --with-http_stub_status_module --with-http_random_index_module --with-http_gunzip_module --with-threads --with-openssl=/usr/local/src/openssl-1.1.0f --with-http_geoip_module --without-http_rewrite_module
+
+Error: ./configure: error: the HTTP gzip module requires the zlib library.
+You can either disable the module by using --without-http_gzip_module
+option, or install the zlib library into the system, or build the zlib library
+statically from the source with nginx by using --with-zlib=<path> option.
+
+> apt install zlib1g-dev
+> ./configure --prefix=/etc/nginx --sbin-path=/usr/sbin/nginx --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log --http-log-path=/var/log/nginx/access.log --pid-path=/var/run/nginx.pid --lock-path=/var/run/nginx.lock --http-client-body-temp-path=/var/cache/nginx/client_temp --http-proxy-temp-path=/var/cache/nginx/proxy_temp --http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp --user=nginx --group=nginx --without-http_autoindex_module --without-http_ssi_module --without-http_scgi_module --without-http_uwsgi_module --without-http_split_clients_module --without-http_memcached_module --without-http_empty_gif_module --without-http_browser_module --with-http_ssl_module --with-http_v2_module --with-http_realip_module --with-http_mp4_module --with-http_auth_request_module --with-http_stub_status_module --with-http_random_index_module --with-http_gunzip_module --with-threads --with-openssl=/usr/local/src/openssl-1.1.0f --with-http_geoip_module --without-http_rewrite_module
+
+> Configuration summary
+  + using threads
+  + PCRE library is not used
+  + using OpenSSL library: /usr/local/src/openssl-1.1.0f
+  + using system zlib library
+
+  nginx path prefix: "/etc/nginx"
+  nginx binary file: "/usr/sbin/nginx"
+  nginx modules path: "/etc/nginx/modules"
+  nginx configuration prefix: "/etc/nginx"
+  nginx configuration file: "/etc/nginx/nginx.conf"
+  nginx pid file: "/var/run/nginx.pid"
+  nginx error log file: "/var/log/nginx/error.log"
+  nginx http access log file: "/var/log/nginx/access.log"
+  nginx http client request body temporary files: "/var/cache/nginx/client_temp"
+  nginx http proxy temporary files: "/var/cache/nginx/proxy_temp"
+  nginx http fastcgi temporary files: "/var/cache/nginx/fastcgi_temp"
+
+> apt install make && make-guile
+> make && make install
+
+Error: make -f objs/Makefile
+make[1]: Entering directory '/etc/nginx/nginx-1.20.1'
+cd /usr/local/src/openssl-1.1.0f \
+&& if [ -f Makefile ]; then make clean; fi \
+&& ./config --prefix=/usr/local/src/openssl-1.1.0f/.openssl no-shared no-threads  \
+&& make \
+&& make install_sw LIBDIR=lib
+/bin/sh: 1: cd: can't cd to /usr/local/src/openssl-1.1.0f
+objs/Makefile:1313: recipe for target '/usr/local/src/openssl-1.1.0f/.openssl/include/openssl/ssl.h' failed
+make[1]: *** [/usr/local/src/openssl-1.1.0f/.openssl/include/openssl/ssl.h] Error 2
+make[1]: Leaving directory '/etc/nginx/nginx-1.20.1'
+Makefile:10: recipe for target 'build' failed
+make: *** [build] Error 2
+
+
+
+
+
+
+
+
